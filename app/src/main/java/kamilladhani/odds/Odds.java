@@ -1,5 +1,6 @@
 package kamilladhani.odds;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -7,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -61,6 +63,7 @@ public class Odds extends ActionBarActivity {
         EditText odds = (EditText) findViewById(R.id.oddsBox);
         String oddsStr = odds.getText().toString();
 
+        // Make sure that a valid number was entered
         try {
             int oddsInt = Integer.parseInt(oddsStr);
             if (oddsInt <= 1) {
@@ -71,5 +74,11 @@ public class Odds extends ActionBarActivity {
             oddsStatement.setText(getString(R.string.oddsStatementWarn));
         }
 
+        // Hide Keyboard
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }
