@@ -1,10 +1,13 @@
 package kamilladhani.odds;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.inputmethodservice.KeyboardView;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +15,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.Random;
 
 
 public class Odds extends ActionBarActivity {
@@ -22,6 +27,20 @@ public class Odds extends ActionBarActivity {
         setContentView(R.layout.activity_odds);
 
         final EditText odds = (EditText) findViewById(R.id.oddsBox);
+        odds.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View view, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    switch (keyCode) {
+                        case KeyEvent.KEYCODE_ENTER:
+                            Button submit = (Button) findViewById(R.id.oddsSet);
+                            submit.performClick();
+                            return true;
+                    }
+                }
+                return false;
+            }
+        });
+
         odds.setOnClickListener(new View.OnClickListener() {
 
             String name = odds.getText().toString();
@@ -34,17 +53,18 @@ public class Odds extends ActionBarActivity {
                 }
             }
         });
+
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu (Menu menu){
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_odds, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected (MenuItem item){
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -58,7 +78,7 @@ public class Odds extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onOddsSet(View v) {
+    public void onOddsSet (View v) {
         TextView oddsStatement = (TextView) findViewById(R.id.oddsStatement);
         EditText odds = (EditText) findViewById(R.id.oddsBox);
         String oddsStr = odds.getText().toString();
@@ -69,15 +89,17 @@ public class Odds extends ActionBarActivity {
             if (oddsInt <= 1) {
                 throw new NumberFormatException();
             }
-            oddsStatement.setText(getString(R.string.oddsStatementPre) + " " + String.valueOf(oddsInt));
-        } catch(NumberFormatException nfe) {
+            final Random rand = new Random();
+            int yourInt = rand.nextInt(oddsInt) + 1;
+            oddsStatement.setText(getString(R.string.oddsStatementPre) + " " + String.valueOf(yourInt));
+        } catch (NumberFormatException nfe) {
             oddsStatement.setText(getString(R.string.oddsStatementWarn));
         }
 
         // Hide Keyboard
         View view = this.getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }

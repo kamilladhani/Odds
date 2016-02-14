@@ -11,7 +11,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/oddsQuestion"
         android:id="@+id/oddsQuestionText"
-        android:layout_marginTop="91dp"
+        android:layout_marginTop="92dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -22,20 +22,18 @@
         android:ems="10"
         android:id="@+id/oddsBox"
         android:text="@string/oddsBoxDef"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="28dp"
         android:layout_below="@+id/oddsQuestionText"
-        android:layout_alignRight="@+id/oddsQuestionText"
-        android:layout_alignEnd="@+id/oddsQuestionText" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/set"
+        android:text="@string/submitB"
         android:id="@+id/oddsSet"
-        android:layout_alignBottom="@+id/oddsBox"
-        android:layout_toRightOf="@+id/oddsQuestionText"
-        android:layout_toEndOf="@+id/oddsQuestionText"
-        android:onClick="onOddsSet"/>
+        android:onClick="onOddsSet"
+        android:layout_below="@+id/oddsBox"
+        android:layout_centerHorizontal="true" />
 
 
     <TextView
@@ -43,6 +41,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/oddsStatement"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="51dp"
+        android:layout_below="@+id/oddsSet"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

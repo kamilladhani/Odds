@@ -4,10 +4,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="oddsQuestion">What are the odds?</string>
-    <string name="oddsStatementPre">The odds are 1 in</string>
+    <string name="oddsStatementPre">Your number is:</string>
     <string name="oddsStatementWarn">Please enter a number greater than 1</string>
-
     <string name="oddsBoxDef">1 in&#8230;</string>
-    <string name="set">Set</string>
+    <string name="submitB">Submit</string>
 
 </resources>
